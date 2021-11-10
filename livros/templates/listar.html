@@ -5,6 +5,7 @@
     <title>Listagem de Livros</title>
 </head>
 <body>
+
     <h1>Listagem de Livros</h1>
 
     <table border="1">
@@ -16,15 +17,15 @@
             <td>Quantidade</td>
         <tr>
 
-        {% for r in regs %}
-            <tr>
-                <td>{{r[0]}}</td>
-                <td>{{r[1]}}</td>
-                <td>{{r[2]}}</td>
-                <td>{{r[3]}}</td>
-                <td>{{r[4]}}</td>
-            <tr>
-        {% endfor %}
+            {% for r in regs %}
+        <tr>
+            <td>{{r[0]}}</td>
+            <td>{{r[1]}}</td>
+            <td>{{r[2]}}</td>
+            <td>{{r[3]}}</td>
+            <td>{{r[4]}}</td>
+        <tr>
+            {% endfor %}
 
     </table>
 </body>

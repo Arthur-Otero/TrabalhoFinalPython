@@ -13,13 +13,7 @@ from sqlite3 import Error
 app = Flask(__name__)
 
 
-# 1-> Cadastro de usuario
-# 2-> Validação de usuario
-
-# 3-> Cadastrar livros
-#######################################################
-# 1. Cadastrar produtos
-
+# Cadastrar Livros
 @app.route('/livros/cadastrar', methods=['GET', 'POST'])
 def cadastrar():
     if request.method == 'POST':
@@ -57,7 +51,7 @@ def cadastrar():
     return render_template('cadastrar.html')
 
 
-#  # EXCLUIR LIVRO
+# Excluir Livros
 @app.route('/livros/excluir/<int:id>', methods=['GET'])
 def excluir(id=None):
     conn = None
@@ -79,7 +73,7 @@ def excluir(id=None):
             conn.close()
 
 
-# # EDITAR LIVRO
+# Editar Livros
 @app.route('/livros/editar/<int:id>', methods=['POST'])
 def editar(id=None):
     if id is None:
@@ -112,6 +106,7 @@ def editar(id=None):
                 conn.close()
 
 
+# Listar Livros
 @app.route('/livros', methods=['GET'])
 def listar():
     conn = None
@@ -133,6 +128,8 @@ def listar():
     finally:
         conn.close()
 
+
+# Pagina erro
 @app.errorhandler(404)
 def pagina_nao_encontrada(e):
     return render_template('404.html'), 404
