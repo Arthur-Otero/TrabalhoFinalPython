@@ -2,28 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="estilo.css">
+    <title>Cadastro dos livros</title>
 </head>
 <body>
 
+ 
+<div class="tabela" >
+    <div class="img"> 
+    
+<table align="center" cellpadding="10" cellpacing="10" > 
+<form method="post" id="livos">
 
-<form method="post">
+    <tr>
+    <td><label>Nome do livro:</label></td>
+    <td><input type="text" name="nome" id="nome"></td>
+    </tr>
 
-    <label>Nome do livro:</label>
-    <input type="text" name="nome" id="nome">
+    <tr>
+    <td><label>Autor:</label></td>
+    <td><input type="text" name="autor" id="autor"></td>
+    </tr>
 
-    <label>Autor:</label>
-    <input type="text" name="autor" id="autor">
+    <tr>
+    <td><label>Preço:</label></td>
+    <td><input type="text" name="preco" id="preco"></td>
+    </tr>
 
-    <label>Preço:</label>
-    <input type="text" name="preco" id="preco">
+    <tr>
+    <td><label>Quantidade:</label></td>
+    <td><input type="text" name="quantidade" id="quantidade"></td>
+    </tr>
 
-    <label>Quantidade:</label>
-    <input type="text" name="quantidade" id="quantidade">
-
-    <p><input type=submit value=cadastrar>
+    <tr>
+    <td><p><input type=submit value=cadastrar></p></td>
+    </tr>
 </form>
+</table>   
 
-
-</body>
+            </div> 
+        </div>
+    </body>
 </html>
