@@ -20,7 +20,7 @@ div {
 }
 
 #topo {
-	background-image:url("imagens/topo.png");    
+	background-image:url("../imagem/bibliotecas.jpg");
   background-size:900px 240px;
   width:900px;
   height:240px;
@@ -174,11 +174,11 @@ margin-left:10px;
 body {
     
     background-color:black;
-    background-image:url("IMAGEM/fundo.jpg");
+    background-image:url("../imagem/fundo.jpg");
     background-repeat:no-repeat; 
     background-position:center top; 
     background-attachment:fixed; 
-    background-size:1600px 840px;
+    background-size:cover;
     
     
    

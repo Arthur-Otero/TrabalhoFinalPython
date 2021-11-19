@@ -73,6 +73,11 @@ def excluir(id=None):
             conn.close()
 
 
+@app.route('/', methods=['GET'])
+def inicio():
+    return render_template('inicio.html')
+
+
 # Editar Livros
 @app.route('/livros/editar/<int:id>', methods=['POST'])
 def editar(id=None):
