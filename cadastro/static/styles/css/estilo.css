@@ -13,7 +13,7 @@ body {
 }
 
 .img {
-    background-image: url(imagem/bibliotecas.jpg);
+    background-image: url(../imagem/bibliotecas.jpg);
     position: absolute;
     height: 100%;
     width: 100%;
