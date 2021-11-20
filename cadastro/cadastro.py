@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from flask import request
 from flask import render_template
 
-from datetime import date
 
 import sqlite3
 from sqlite3 import Error
@@ -24,21 +23,22 @@ app = Flask(__name__)
 def cadastrar():
     if request.method == 'POST':
 
-        login = request.form['login']
+        cpf = request.form['cpf']
+        nome = request.form['nome']
+        telefone = request.form['telefone']
+        email = request.form['email']
         senha = request.form['senha']
 
-        mensagem = 'Erro - nao cadastrado'
-
-        if login and senha:
-            registro = (login, senha)
+        if cpf and nome and telefone and email and senha:
+            registro = (cpf, nome, telefone, email, senha)
             conn = None
             try:
 
                 conn = sqlite3.connect('db-usuario.db')
                 # todo validar login existente
 
-                sql = ''' INSERT INTO usuario(login, senha)
-                              VALUES(?,?) '''
+                sql = ''' INSERT INTO usuario(cpf, nome, telefone, email, senha)
+                              VALUES(?,?,?,?,?) '''
 
                 cur = conn.cursor()
 
@@ -69,8 +69,8 @@ def editar(login=None):
             conn = None
             try:
                 conn = sqlite3.connect('db-usuario.db')
-                sql = '''UPDATE usuario set login = ?, senha = ? WHERE
-                login = ? '''
+                sql = '''UPDATE usuario set cpf = ?, nome = ?, telefone = ?, email = ?, senha = ? WHERE
+                cpf = ? '''
 
                 cur = conn.cursor()
 
