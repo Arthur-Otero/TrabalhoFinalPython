@@ -17,6 +17,7 @@
             <td>Autor</td>
             <td>Preço</td>
             <td>Quantidade</td>
+            <td>Deletar</td>
         <tr>
 
             {% for r in regs %}
@@ -24,8 +25,9 @@
             <td>{{r[0]}}</td>
             <td>{{r[1]}}</td>
             <td>{{r[2]}}</td>
-            <td>{{r[3]}}</td>
-            <td>{{r[4]}}</td>
+            <td>R$ {{r[3]}} por unidade</td>
+            <td>{{r[4]}} livros disponiveis</td>
+            <td><a href="./livros/excluir/{{r[0]}}">Excluir</a></td>
         <tr>
             {% endfor %}
 
