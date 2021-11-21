@@ -1,131 +1,61 @@
 <!DOCTYPE html >
 <html lang="en">
-    <head>
-	    <meta charset="UTF-8"/>
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/inicio.css') }}">
-        <title>Biblioteca Virtual</title>
-    </head>
-	
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/css/inicio.css') }}">
+    <title>Biblioteca Virtual</title>
+</head>
+
 <body>
 
-	<div id="geral">
+<div id="geral">
 
-		<div id="topo">		<!--	IMAGEM DO TOPO DO SITE	-->
-	         <img src="IMAGEM/biblioteca.jpeg" width="900" height="237" alt="" border="1">
-                 </div>
-		
-		<div id="menu">	<!--	PAGINA INICIAL	-->
-		 <ul>
-         
-                   <li><a href="" title=""> INICIO </a></li>
-                
-                   <li><a href="" title=""> CADASTRO </a></li>
-         
-                   <li><a href="./livros" title=""> LIVROS  </a></li>
-          
-                   <li><a href="./livros/cadastrar" title=""> CADATRO LIVROS </a></li>
-                  
-            
-                 </u>
+    <div id="topo">        <!--	IMAGEM DO TOPO DO SITE	-->
+        <img src="IMAGEM/biblioteca.jpeg" width="900" height="237" alt="" border="1">
+    </div>
 
-    
+    <div id="menu">    <!--	PAGINA INICIAL	-->
+        <ul>
+
+            <li><a href="" title=""> INICIO </a></li>
+
+            <li><a href="./usuario/cadastrar" title=""> CADASTRO USUARIO</a></li>
+
+            <li><a href="./livros" title=""> LIVROS </a></li>
+
+            <li><a href="./livros/cadastrar" title=""> CADATRO LIVROS </a></li>
+
+
+        </ul>
+
+    </div>
+
+    <div id="tabela_usuario">
+            <table border="1" align="center" bgcolor="black" id="tabela_usuario_tag">
+                <tr>
+                    <td>CPF</td>
+                    <td>Nome</td>
+                    <td>Telefone</td>
+                    <td>E-mail</td>
+                <tr>
+
+                    {% for r in regs %}
+                <tr>
+                    <td>{{r[1]}}</td>
+                    <td>{{r[2]}}</td>
+                    <td>{{r[3]}}</td>
+                    <td>{{r[4]}}</td>
+                <tr>
+                    {% endfor %}
+
+            </table>
         </div>
-		
-	<!--	<div id="acessorios"> 
-		
-		 <h2 align="center"><i><font color="black"> Cadastre-se no nosso site !! </font></i></h2>
- 
-  <table border="1" align="center" bgcolor="grey" >
-  <tr><td>   
 
+</div>
 
-  <fieldset>
-  <legend > Digite seus dados  </legend>
-  
-
-  <form>
-
- <table border="0" cellpadding="20" cellpacing="20">
- 
- <tr>
-
- <td><label> Nome: </label></td>
- <td><input type="text" id="nome" name="nome" size="40" maxlenght="40" placeholder="Digite Seu Nome" /></td> 
-
- </tr>
-  
- <tr>
- 
- <td><label> E-mail: </label></td>
- <td><input type="email" id="email" name="mail" size="40" maxlenght="30" /></td>
-
- </tr>
-
- <tr>
- 
- <td><label> Endereço Residencial </label></td>
- <td><input type="text" id="endereço" name="endereço" size="50" maxlenght="40" /></td>
-
- </tr>
-
- <tr>
-
- <td><label> Cidade </label></td>
- <td><input type="text" id="cidade" name="cidade" size="40" maxlenght="30" />
- 
- 
-
- <label> UF: </label>
- <select id="Uf" name="Uf" >
- <option value="" selected="selected" > </option>
- <optgroup label="Estados">
-  <option value="MG"> MG </option>
-  <option value="SP"> SP </option>
-  <option value="RJ"> RJ </option>
-  <option value="BA"> BA </option>
-  <option value="RG"> RG </option>
-  <option value="MT"> MT </option>
-
- </optgroup>
-</select></td>
-
-</tr>
-<tr>
-
- <td><label> Telefone </label></td>
- <td><input type="text" id="tel" name="tel" size="30" maxlenght="11"/>
-</tr>
-
-</table>
-  </form>
- </fieldser>
- </tr></td>
- </table>
-
-<p align="center">
-
-<button type="submit" id="send" name="send">
- <img src="Imagens/download.jpg" width="30" height="25" alt="btn">
- </button> 
-
-&nbsp;&nbsp;
-
- 
- <button type="submit" id="send" name="send">
- <img src="Imagens/Cancelar.gif" width="30" height="25" alt="btn">
- </button> 
-
-</p> -->
-
-		</div>
-		
-		<div id="rodape"> 
-		
-			<h4>Direitos autorais || Barbara Melo, Arthur Otero, Bruno Rodrigues, Evellyn Caetano e Thiago </h4></div>
-		
-		</div>
-		
-	</div>
+<div id="rodape">
+    <h4>Direitos autorais || Barbara Melo, Arthur Otero, Bruno Rodrigues, Evellyn Caetano e Thiago </h4>
+</div>
 
 </body>
 
