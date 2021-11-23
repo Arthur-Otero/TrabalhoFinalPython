@@ -13,6 +13,7 @@ div {
    margin-top: 50px;
    border-radius:8px;
 
+
 }
 
 #tabela_usuario_tag{
@@ -34,7 +35,7 @@ div {
 }
 
 #topo {
-	background-image:url("../imagem/bibliotecas.jpg");
+	background-image:url("../imagem/biblioteca.jpeg");
   background-size:900px 240px;
   width:900px;
   height:240px;
@@ -46,6 +47,9 @@ div {
   -moz-border-radius:10px;    
   -webkit-border-radius:10px;    
 }
+
+
+
 	
 .texto{
 	float:left; 
@@ -145,8 +149,8 @@ margin-left:10px;
     width:90%;
     height:60px;
     background-color:rgba(0, 0, 0, 0.8);
-    margin-left:23px;
-    margin-right:23px;
+    margin-left:auto;
+    margin-right:auto;
     margin-top:10px;
 display: flex;
 justify-content: center;
@@ -201,11 +205,11 @@ body {
 }
 		/*	INICIO FORMATAÇÃO RODAPÉ	*/
 #rodape {	
-  float:left;
   width:900px;
   height:40px;
   background-color:rgba(0, 0, 0, 0.8);
-  margin-left:23px;									
+  margin-left:auto;
+  margin-right:auto;
   margin-top:10px;
   line-height:40px;
 

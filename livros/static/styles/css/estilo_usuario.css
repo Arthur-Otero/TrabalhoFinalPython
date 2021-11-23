@@ -12,12 +12,31 @@ body {
     margin: 0;
 }
 
+table {
+    border-radius:10px;     
+  -moz-border-radius:10px;   
+  -webkit-border-radius:10px;  
+}
+
+#topo2 {
+    background-image:url("../imagem/Cadastro_de_Usuário.png");
+    background-size:900px 240px;
+    width:900px;
+    height:240px;
+    margin:0 auto;
+    
+      
+      border-radius:10px;    
+    -moz-border-radius:10px;    
+    -webkit-border-radius:10px;    
+  }
+
 .img {
     background-image: url(../imagem/bibliotecas.jpg);
     position: absolute;
     height: 100%;
     width: 100%;
-    opacity: 1.0s;
+    
 
 }
 

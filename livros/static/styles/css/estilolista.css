@@ -11,8 +11,21 @@ body{
     padding: 0;
     margin: 0;
 }
-
+#topo3 {
+    background-image:url("../imagem/Listagem.png");
+    background-size:900px 240px;
+    width:900px;
+    height:240px;
+    margin:0 auto;
+    
+      
+      border-radius:10px;    
+    -moz-border-radius:10px;    
+    -webkit-border-radius:10px;    
+  }
+  
 table {
+    margin-top: 30px;
     border-radius:10px;     
   -moz-border-radius:10px;   
   -webkit-border-radius:10px;  
@@ -23,6 +36,5 @@ table {
     position: absolute;
     height: 100%;
     width: 100%;
-    opacity: 0.9;
 
 }

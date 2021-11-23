@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, redirect
 from flask import request
 from flask import render_template
 
@@ -65,7 +65,8 @@ def excluir(id=None):
             cur.execute(sql)
             conn.commit()
 
-            return jsonify({'mensagem': 'registro excluido'})
+           # return jsonify({'mensagem': 'registro excluido'})
+            return redirect('http://127.0.0.1:5000/livros')
 
         except Error as e:
             return jsonify({'mensagem': e})
