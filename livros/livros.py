@@ -65,7 +65,7 @@ def excluir(id=None):
             cur.execute(sql)
             conn.commit()
 
-           # return jsonify({'mensagem': 'registro excluido'})
+            # return jsonify({'mensagem': 'registro excluido'})
             return redirect('http://127.0.0.1:5000/livros')
 
         except Error as e:
@@ -74,59 +74,42 @@ def excluir(id=None):
             conn.close()
 
 
-@app.route('/', methods=['GET'])
-def inicio():
-    conn = None
-    try:
-
-        conn = sqlite3.connect('db-usuario.db')
-        sql = '''SELECT * FROM usuario'''
-
-        cur = conn.cursor()
-
-        cur.execute(sql)
-
-        registros = cur.fetchall()
-
-        return render_template('Inicio.html', regs=registros)
-
-    except Error as e:
-        print(e)
-    finally:
-        conn.close()
-
-
 # Editar Livros
-@app.route('/livros/editar/<int:id>', methods=['POST'])
-def editar_livro(id=None):
+@app.route('/livros/editar/<string:quantidade_api>/<int:id>', methods=['GET'])
+def editar_livro(id=None, quantidade_api=None):
+    quantidade = 0
     if id is None:
         return jsonify({'mensagem': 'Valor invalido'})
     else:
-        nome = request.form['nome']
-        autor = request.form['autor']
-        preco = request.form['preco']
-        quantidade = request.form['quantidade']
+        conn = None
+        try:
+            conn = sqlite3.connect('db-livros.db')
 
-        if nome and autor and preco and quantidade:
-            registro = (nome, autor, preco, quantidade, id)
-            conn = None
-            try:
-                conn = sqlite3.connect('db-livros.db')
-                sql = '''UPDATE livros set nome = ?, autor = ?, preco = ?, quantidade = ? WHERE
-                id = ? '''
+            sql = '''SELECT * FROM livros WHERE id = ''' + str(id)
 
-                cur = conn.cursor()
+            cur = conn.cursor()
+            cur.execute(sql)
 
-                cur.execute(sql, registro)
+            registros = cur.fetchall()
 
-                conn.commit()
+            for i in registros:
+                print(i)
+                if i[4] + int(quantidade_api) > 0:
+                    quantidade = i[4] + int(quantidade_api)
 
-                return jsonify({'mensagem': 'Livro atualizado'})
+            sql = '''UPDATE livros SET quantidade = ? WHERE id = ? '''
+            cur = conn.cursor()
+            registro = (quantidade, id)
+            cur.execute(sql, registro)
 
-            except Error as e:
-                return jsonify({'mensagem': e})
-            finally:
-                conn.close()
+            conn.commit()
+
+            return redirect('http://127.0.0.1:5000/livros')
+
+        except Error as e:
+            return jsonify({'mensagem': e})
+        finally:
+            conn.close()
 
 
 # Listar Livros
@@ -154,6 +137,28 @@ def listar():
 
 # Cadastros de Usuario
 #######################################################################################################
+@app.route('/', methods=['GET'])
+def inicio():
+    conn = None
+    try:
+
+        conn = sqlite3.connect('db-usuario.db')
+        sql = '''SELECT * FROM usuario'''
+
+        cur = conn.cursor()
+
+        cur.execute(sql)
+
+        registros = cur.fetchall()
+
+        return render_template('Inicio.html', regs=registros)
+
+    except Error as e:
+        print(e)
+    finally:
+        conn.close()
+
+
 @app.route('/usuario/cadastrar', methods=['GET', 'POST'])
 def cadastrar():
     if request.method == 'POST':
@@ -170,7 +175,6 @@ def cadastrar():
             try:
 
                 conn = sqlite3.connect('db-usuario.db')
-                # todo validar login existente
 
                 sql = ''' INSERT INTO usuario(cpf, nome, telefone, email, senha)
                               VALUES(?,?,?,?,?) '''
