@@ -2,6 +2,7 @@ from flask import Flask, jsonify, redirect
 from flask import request
 from flask import render_template
 
+import pymysql
 from datetime import date
 
 import sqlite3
@@ -12,6 +13,17 @@ from sqlite3 import Error
 
 app = Flask(__name__)
 
+rds_host = 'mysqlserver.c91yee6tpto5.us-east-1.rds.amazonaws.com'
+name = 'admin'
+password = 'admin1980'
+db_name = 'usuario'
+port = 3306
+
+rds_host2 = 'database-1.c91yee6tpto5.us-east-1.rds.amazonaws.com'
+name2 = 'admin'
+password2 = 'admin1980'
+db_name2 = 'teste2'
+port2 = 3306
 
 # Cadastrar Livros
 @app.route('/livros/cadastrar', methods=['GET', 'POST'])
@@ -26,15 +38,16 @@ def cadastrar_livro():
         mensagem = 'Erro - nao cadastrado'
 
         if nome and autor and preco and quantidade:
-            registro = (nome, autor, preco, quantidade)
-            conn = None
             try:
 
-                conn = sqlite3.connect('db-livros.db')
+                conn = pymysql.connect(host=rds_host2, user=name2,
+                                       passwd=password2, db=db_name2,
+                                       connect_timeout=5,
+                                       cursorclass=pymysql.cursors.DictCursor)
 
-                sql = ''' INSERT INTO livros(nome, autor, preco, quantidade)
-                              VALUES(?,?,?,?) '''
-
+                sql = ''' INSERT INTO livros2(nome, autor, preco, quantidade)
+                              VALUES(%s,%s,%s,%s) '''
+                registro = (nome, autor, preco, quantidade)
                 cur = conn.cursor()
 
                 cur.execute(sql, registro)
@@ -59,8 +72,11 @@ def excluir(id=None):
         return jsonify({'mensagem': 'ID invalido'})
     else:
         try:
-            conn = sqlite3.connect('db-livros.db')
-            sql = '''DELETE FROM livros WHERE id = ''' + str(id)
+            conn = pymysql.connect(host=rds_host2, user=name2,
+                                   passwd=password2, db=db_name2,
+                                   connect_timeout=5,
+                                   cursorclass=pymysql.cursors.DictCursor)
+            sql = '''DELETE FROM livros2 WHERE id = ''' + str(id)
             cur = conn.cursor()
             cur.execute(sql)
             conn.commit()
@@ -83,9 +99,12 @@ def editar_livro(id=None, quantidade_api=None):
     else:
         conn = None
         try:
-            conn = sqlite3.connect('db-livros.db')
+            conn = pymysql.connect(host=rds_host2, user=name2,
+                                   passwd=password2, db=db_name2,
+                                   connect_timeout=5,
+                                   cursorclass=pymysql.cursors.DictCursor)
 
-            sql = '''SELECT * FROM livros WHERE id = ''' + str(id)
+            sql = '''SELECT * FROM livros2 WHERE id = ''' + str(id)
 
             cur = conn.cursor()
             cur.execute(sql)
@@ -94,10 +113,10 @@ def editar_livro(id=None, quantidade_api=None):
 
             for i in registros:
                 print(i)
-                if i[4] + int(quantidade_api) > 0:
-                    quantidade = i[4] + int(quantidade_api)
+                if i['quantidade'] + int(quantidade_api) > 0:
+                    quantidade = i['quantidade'] + int(quantidade_api)
 
-            sql = '''UPDATE livros SET quantidade = ? WHERE id = ? '''
+            sql = '''UPDATE livros2 SET quantidade = %s WHERE id = %s '''
             cur = conn.cursor()
             registro = (quantidade, id)
             cur.execute(sql, registro)
@@ -118,16 +137,24 @@ def listar():
     conn = None
     try:
 
-        conn = sqlite3.connect('db-livros.db')
-        sql = '''SELECT * FROM livros'''
+        conn = pymysql.connect(host=rds_host2, user=name2,
+                               passwd=password2, db=db_name2,
+                               connect_timeout=5,
+                               cursorclass=pymysql.cursors.DictCursor)
+        sql = '''SELECT * FROM livros2'''
 
         cur = conn.cursor()
 
         cur.execute(sql)
 
         registros = cur.fetchall()
+        arrayRegistros = []
 
-        return render_template('listar.html', regs=registros)
+        for i in registros:
+            array2 = [i['id'],i['nome'], i['autor'], i['preco'], i['quantidade']]
+            arrayRegistros.append(array2)
+
+        return render_template('listar.html', regs=arrayRegistros)
 
     except Error as e:
         print(e)
@@ -141,17 +168,25 @@ def listar():
 def inicio():
     conn = None
     try:
-
-        conn = sqlite3.connect('db-usuario.db')
-        sql = '''SELECT * FROM usuario'''
+        conn = pymysql.connect(host=rds_host, user=name,
+                               passwd=password, db=db_name,
+                               connect_timeout=5,
+                               cursorclass=pymysql.cursors.DictCursor)
+        #conn = sqlite3.connect('db-usuario.db')
+        sql = "select * from usuario"
 
         cur = conn.cursor()
 
         cur.execute(sql)
 
         registros = cur.fetchall()
+        arrayRegistros = []
 
-        return render_template('Inicio.html', regs=registros)
+        for i in registros:
+            array2 = [i['cpf'],i['nome'],i['telefone'],i['email'],i['senha']]
+            arrayRegistros.append(array2)
+
+        return render_template('Inicio.html', regs=arrayRegistros)
 
     except Error as e:
         print(e)
@@ -170,18 +205,20 @@ def cadastrar():
         senha = request.form['senha']
 
         if cpf and nome and telefone and email and senha:
-            registro = (cpf, nome, telefone, email, senha)
             conn = None
             try:
 
-                conn = sqlite3.connect('db-usuario.db')
-
+                conn = pymysql.connect(host=rds_host, user=name,
+                                       passwd=password, db=db_name,
+                                       connect_timeout=5,
+                                       cursorclass=pymysql.cursors.DictCursor)
                 sql = ''' INSERT INTO usuario(cpf, nome, telefone, email, senha)
-                              VALUES(?,?,?,?,?) '''
+                              VALUES(%s,%s,%s,%s,%s) '''
 
+                registro = (cpf, nome, telefone, email, senha)
                 cur = conn.cursor()
 
-                cur.execute(sql, registro)
+                cur.execute(sql,registro)
 
                 conn.commit()
 
@@ -207,7 +244,10 @@ def editar(login=None):
             registro = (login, senha, login)
             conn = None
             try:
-                conn = sqlite3.connect('db-usuario.db')
+                conn = pymysql.connect(host=rds_host, user=name,
+                                       passwd=password, db=db_name,
+                                       connect_timeout=5,
+                                       cursorclass=pymysql.cursors.DictCursor)
                 sql = '''UPDATE usuario set cpf = ?, nome = ?, telefone = ?, email = ?, senha = ? WHERE
                 cpf = ? '''
 
@@ -232,6 +272,5 @@ def pagina_nao_encontrada(e):
 
 #######################################################
 # Execucao da Aplicacao
-
 if __name__ == '__main__':
     app.run()
