@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css/estilo_usuario.css') }}"/>
+    <title>Cadastro do usuário</title>
+
+</head>
+
+    <body>
+        <div>
+        <div class="img">
+
+        <div id="topo2">		<!--	IMAGEM DO TOPO DO SITE	-->
+
+        </div>
+
+         <table align="center" cellpadding="10" cellpacing="10">
+            <form method="post" id="cadastrar">
+
+                <tr>
+                <td><label>CPF:</label></td>
+                <td><input type="text" name="cpf" id="cpf"></td>
+                </tr>
+
+                <tr>
+                <td><label>Nome:</label></td>
+                <td><input type="text" name="nome" id="nome"></td>
+                </tr>
+
+                <tr>
+                <td><label>Telefone:</label></td>
+                <td><input type="text" name="telefone" id="telefone"></td>
+                </tr>
+
+                <tr>
+                <td><label>E-mail:</label></td>
+                <td><input type="email" name="email" id="email"></td>
+                </tr>
+
+                <tr>
+                <td><label>Senha:</label></td>
+                <td><input type="text" name="senha" id="senha"></td>
+                </tr>
+
+                <tr>
+                <td><p><input  type=submit value=cadastrar></p></td>
+                </tr>
+            </form>
+        </table>
+        </div>
+        </div>
+    </body>
+</html>

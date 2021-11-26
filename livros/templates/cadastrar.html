@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css/estilo.css') }}">
+    <title>Cadastro dos livros</title>
+</head>
+<body>
+
+
+<div class="tabela">
+    <div class="img">
+
+        <div id="topo1">        <!--	IMAGEM DO TOPO DO SITE	-->
+
+        </div>
+
+        <table align="center" cellpadding="10" cellpacing="10">
+            <form method="post" id="livos">
+
+                <tr>
+                    <td><label>Nome do livro:</label></td>
+                    <td><input type="text" name="nome" id="nome"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Autor:</label></td>
+                    <td><input type="text" name="autor" id="autor"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Preço:</label></td>
+                    <td><input type="text" name="preco" id="preco"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Quantidade:</label></td>
+                    <td><input type="text" name="quantidade" id="quantidade"></td>
+                </tr>
+
+                <tr>
+                    <td><p><input type=submit value=cadastrar></p></td>
+                </tr>
+            </form>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

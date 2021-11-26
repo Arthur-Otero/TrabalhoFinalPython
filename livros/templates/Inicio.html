@@ -1,0 +1,62 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/css/inicio.css') }}">
+    <title>Biblioteca Virtual</title>
+</head>
+
+<body>
+
+<div id="geral">
+
+    <div id="topo">        <!--	IMAGEM DO TOPO DO SITE	-->
+        
+    </div>
+
+    <div id="menu">    <!--	PAGINA INICIAL	-->
+        <ul>
+
+            <li><a href="" title=""> INICIO </a></li>
+
+            <li><a href="./usuario/cadastrar" title=""> CADASTRO USUARIO</a></li>
+
+            <li><a href="./livros" title=""> LIVROS </a></li>
+
+            <li><a href="./livros/cadastrar" title=""> CADASTRO LIVROS </a></li>
+
+
+        </ul>
+
+    </div>
+
+    <div id="tabela_usuario">
+            <table border="1" align="center" bgcolor="black" id="tabela_usuario_tag">
+                <tr>
+                    <td>CPF</td>
+                    <td>Nome</td>
+                    <td>Telefone</td>
+                    <td>E-mail</td>
+                <tr>
+
+                    {% for r in regs %}
+                <tr>
+                    <td>{{r[1]}}</td>
+                    <td>{{r[2]}}</td>
+                    <td>{{r[3]}}</td>
+                    <td>{{r[4]}}</td>
+                <tr>
+                    {% endfor %}
+
+            </table>
+        </div>
+
+</div>
+
+<div id="rodape">
+    <h4>Direitos autorais || Barbara Melo, Arthur Otero, Bruno Rodrigues, Evellyn Caetano e Thiago </h4>
+</div>
+
+</body>
+
+</html>
