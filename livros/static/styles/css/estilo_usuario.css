@@ -37,8 +37,16 @@ table {
     height: 100%;
     width: 100%;
     
-
 }
+
+
+#voltar {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+
 
 input {
     color: white;
